@@ -10,7 +10,9 @@ import { ShieldAlert, Download, AlertTriangle, Info, CheckSquare, BrainCircuit }
 export default function ReportPage({ params }: { params: Promise<{ id: string }> }) {
   const resolvedParams = use(params);
   const id = parseInt(resolvedParams.id);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [inv, setInv] = useState<any>(null);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [report, setReport] = useState<any>(null);
 
   useEffect(() => {

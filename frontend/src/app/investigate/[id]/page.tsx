@@ -16,7 +16,9 @@ export default function InvestigationStatus({ params }: { params: Promise<{ id: 
   const id = parseInt(resolvedParams.id);
   const router = useRouter();
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [inv, setInv] = useState<any>(null);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [logs, setLogs] = useState<any[]>([]);
 
   useEffect(() => {
@@ -46,6 +48,7 @@ export default function InvestigationStatus({ params }: { params: Promise<{ id: 
     return <div className="flex h-screen items-center justify-center"><Loader2 className="w-8 h-8 animate-spin text-primary" /></div>;
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const progressMap: any = {
     "pending": 10,
     "running": 50,

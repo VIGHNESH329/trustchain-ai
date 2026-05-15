@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { getDashboardStats } from "@/lib/api";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { ShieldAlert, Activity, CheckCircle, XCircle, Terminal, Smartphone, Eye, ServerCrash, Skull, Network, Brain, History } from "lucide-react";
+import { ShieldAlert, Activity, CheckCircle, Terminal, Smartphone, Eye, Skull, Network, Brain, History } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import { Badge } from "@/components/ui/badge";
@@ -16,6 +16,7 @@ const WS_URL = "wss://trustchain-ai-j7rp.onrender.com/ws/dashboard";
 export default function Dashboard() {
   const [stats, setStats] = useState({ total_investigations: 0, completed: 0, failed: 0, high_risk: 0 });
   const [activeDevices, setActiveDevices] = useState<number>(0);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [liveThreats, setLiveThreats] = useState<any[]>([]);
   const [agentLogs, setAgentLogs] = useState<string[]>(["> Awaiting incoming webhooks..."]);
   const [wsStatus, setWsStatus] = useState("Connecting...");
