@@ -11,7 +11,7 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { Progress } from "@/components/ui/progress";
 
 // WebSocket URL
-const WS_URL = "ws://127.0.0.1:8000/ws/dashboard";
+const WS_URL = "wss://trustchain-ai-j7rp.onrender.com/ws/dashboard";
 
 export default function Dashboard() {
   const [stats, setStats] = useState({ total_investigations: 0, completed: 0, failed: 0, high_risk: 0 });

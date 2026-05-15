@@ -9,8 +9,8 @@ import kotlin.concurrent.thread
 
 object WebhookDispatcher {
     
-    // IP Updated automatically for your Personal Wi-Fi Network
-    private const val BACKEND_URL = "http://10.230.59.76:8000/webhooks/new-message"
+    // Production Cloud Backend (Render)
+    private const val BACKEND_URL = "https://trustchain-ai-j7rp.onrender.com/webhooks/new-message"
     private const val TAG = "TrustChainWebhook"
 
     fun dispatch(source: String, content: String, urls: List<String>) {
