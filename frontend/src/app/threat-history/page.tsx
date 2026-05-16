@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useAuth, RedirectToSignIn } from "@clerk/nextjs";
 import { getHistory } from "@/lib/api";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { ShieldAlert, Database, Search, Filter, ShieldCheck, Skull, ArrowLeft, ExternalLink, Calendar, Server } from "lucide-react";
@@ -16,7 +17,10 @@ export default function ThreatHistory() {
   const [searchTerm, setSearchTerm] = useState("");
   const [loading, setLoading] = useState(true);
 
+  const { isLoaded, userId } = useAuth();
+
   useEffect(() => {
+    if (!userId) return;
     const fetchHistory = async () => {
       try {
         const data = await getHistory();
@@ -35,15 +39,17 @@ export default function ThreatHistory() {
     (item.results?.threat_type || "").toLowerCase().includes(searchTerm.toLowerCase())
   );
 
-import { SignedIn, SignedOut, RedirectToSignIn } from "@clerk/nextjs";
-
-// ... existing code ...
+  if (!isLoaded) {
+    return <div className="min-h-screen bg-[#030303] flex items-center justify-center"><Server className="w-8 h-8 text-indigo-500 animate-pulse" /></div>;
+  }
+  
+  if (!userId) {
+    return <RedirectToSignIn />;
+  }
 
   return (
-    <>
-      <SignedIn>
-        <div className="flex flex-col min-h-screen bg-[#030303] text-white relative overflow-hidden">
-          {/* Background styling */}
+    <div className="flex flex-col min-h-screen bg-[#030303] text-white relative overflow-hidden">
+      {/* Background styling */}
           <div className="fixed inset-0 z-0 opacity-[0.02] pointer-events-none" style={{ backgroundImage: 'linear-gradient(to right, #ffffff 1px, transparent 1px), linear-gradient(to bottom, #ffffff 1px, transparent 1px)', backgroundSize: '4rem 4rem' }} />
           <div className="fixed top-0 right-1/4 w-[800px] h-[500px] bg-indigo-600/10 blur-[150px] rounded-full pointer-events-none" />
 
@@ -160,11 +166,6 @@ import { SignedIn, SignedOut, RedirectToSignIn } from "@clerk/nextjs";
               </div>
             )}
           </div>
-        </div>
-      </SignedIn>
-      <SignedOut>
-        <RedirectToSignIn />
-      </SignedOut>
-    </>
+    </div>
   );
 }

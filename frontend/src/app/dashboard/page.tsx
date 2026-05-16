@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useAuth, RedirectToSignIn } from "@clerk/nextjs";
 import { getDashboardStats } from "@/lib/api";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { ShieldAlert, Activity, CheckCircle, Terminal, Smartphone, Eye, Skull, Network, Brain, History } from "lucide-react";
@@ -22,7 +23,11 @@ export default function Dashboard() {
   const [agentLogs, setAgentLogs] = useState<string[]>(["> Awaiting incoming webhooks..."]);
   const [wsStatus, setWsStatus] = useState("Connecting...");
 
+  const { isLoaded, userId } = useAuth();
+
   useEffect(() => {
+    // Only connect WebSocket if logged in
+    if (!userId) return;
     // Initial fetch of historical stats
     const fetchStats = async () => {
       try {
@@ -87,15 +92,17 @@ export default function Dashboard() {
     { title: "Active Devices", value: activeDevices, icon: Smartphone, color: "from-purple-500 to-pink-500", glow: "shadow-purple-500/20" },
   ];
 
-import { SignedIn, SignedOut, RedirectToSignIn } from "@clerk/nextjs";
-
-// ... existing code ...
+  if (!isLoaded) {
+    return <div className="min-h-screen bg-[#030303] flex items-center justify-center"><div className="w-8 h-8 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"></div></div>;
+  }
+  
+  if (!userId) {
+    return <RedirectToSignIn />;
+  }
 
   return (
-    <>
-      <SignedIn>
-        <div className="flex flex-col min-h-screen bg-[#030303] text-white relative overflow-hidden">
-          {/* Background styling */}
+    <div className="flex flex-col min-h-screen bg-[#030303] text-white relative overflow-hidden">
+      {/* Background styling */}
           <div className="fixed inset-0 z-0 opacity-[0.02] pointer-events-none" style={{ backgroundImage: 'linear-gradient(to right, #ffffff 1px, transparent 1px), linear-gradient(to bottom, #ffffff 1px, transparent 1px)', backgroundSize: '4rem 4rem' }} />
           <div className="fixed top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[500px] bg-blue-600/10 blur-[150px] rounded-full pointer-events-none" />
 
@@ -242,14 +249,8 @@ import { SignedIn, SignedOut, RedirectToSignIn } from "@clerk/nextjs";
                   </CardContent>
                 </Card>
               </div>
-
             </div>
           </div>
         </div>
-      </SignedIn>
-      <SignedOut>
-        <RedirectToSignIn />
-      </SignedOut>
-    </>
   );
 }
