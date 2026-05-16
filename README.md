@@ -1,32 +1,41 @@
-# SentinelX AI - Autonomous Cybersecurity Incident Response Platform
+# Trust Chain AI - Autonomous Cybersecurity Incident Response Platform
 
-SentinelX AI is a full-stack hackathon-grade web application that leverages multiple AI agents to autonomously investigate cybersecurity threats (phishing URLs, suspicious emails, text messages).
+Trust Chain AI is an enterprise-grade, full-stack cybersecurity web application that leverages multiple AI agents to autonomously intercept and investigate live telemetry threats (phishing URLs, suspicious emails, malicious Android SMS payloads).
 
-## Features
-- **Multi-Agent Architecture**: Uses Detection, Threat Intelligence, Reasoning, and Response agents.
-- **Autonomous Workflow**: End-to-end processing with no manual intervention.
-- **FastAPI Backend**: Asynchronous orchestration and background tasks.
-- **Next.js 14 Frontend**: Modern, cyber-themed dashboard using shadcn/ui and Framer Motion.
+## 🚀 Features
+- **Mobile Threat Interception**: Built-in Android app hook for live SMS monitoring and cloud webhook ingestion.
+- **Multi-Agent AI Architecture**: Utilizes specialized Detection, Threat Intelligence, Reasoning, and Response neural agents.
+- **Autonomous Workflow**: End-to-end multi-agent processing with zero manual intervention required.
+- **FastAPI Core**: Highly-performant Python backend with asynchronous agent orchestration and live WebSocket telemetry streaming.
+- **Enterprise Security**: Clerk integrated identity and routing protection for SOC (Security Operations Center) analysts.
+- **Next.js 15 Frontend**: Modern, cyberpunk-themed SOC Dashboard built on the App Router, Shadcn UI, and Framer Motion.
+- **Persistent Cloud Storage**: Neon PostgreSQL database integration for secure, long-term historical incident archiving.
 
-## Getting Started
+## 🛠️ Architecture
+- **Agents**: Orchestrated entirely via Google's latest Gemini 2.5 (`gemini-2.5-flash`).
+- **Database**: Cloud-hosted Neon PostgreSQL via SQLAlchemy.
+- **Frontend Framework**: Next.js 15+ (React 19) with Turbopack.
+- **Security**: @clerk/nextjs component-level and middleware protection.
+
+## 💻 Getting Started
 
 ### Prerequisites
 - Node.js 18+
 - Python 3.11+
 - Gemini API Key
+- Neon PostgreSQL Database URI
+- Clerk Publishable & Secret Keys
 
 ### Backend Setup
 1. Navigate to the backend directory:
    ```bash
    cd backend
    ```
-2. Create and activate a virtual environment (if not already done):
+2. Create and activate a virtual environment:
    ```bash
    python -m venv venv
    # Windows:
    .\venv\Scripts\activate
-   # Linux/Mac:
-   source venv/bin/activate
    ```
 3. Install dependencies:
    ```bash
@@ -34,7 +43,8 @@ SentinelX AI is a full-stack hackathon-grade web application that leverages mult
    ```
 4. Create a `.env` file in the `backend` folder:
    ```env
-   GEMINI_API_KEY=your_gemini_api_key_here
+   GEMINI_API_KEY=your_gemini_api_key
+   DATABASE_URL=your_neon_postgres_uri
    ```
 5. Run the FastAPI server:
    ```bash
@@ -50,16 +60,18 @@ SentinelX AI is a full-stack hackathon-grade web application that leverages mult
    ```bash
    npm install
    ```
-3. Run the development server:
+3. Create a `.env.local` file in the `frontend` folder:
+   ```env
+   NEXT_PUBLIC_API_URL=http://localhost:8000
+   NEXT_PUBLIC_WS_URL=ws://localhost:8000/ws
+   NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=your_clerk_publishable_key
+   CLERK_SECRET_KEY=your_clerk_secret_key
+   ```
+4. Run the development server:
    ```bash
    npm run dev
    ```
 
-## Architecture
-- **Agents**: Orchestrated using Google's Gemini API (`gemini-2.5-flash`).
-- **Database**: SQLite (via SQLAlchemy). Easily swappable for Supabase/PostgreSQL.
-- **UI**: Tailwind CSS with dark mode variables, shadcn/ui components.
-
-## Deployment
-- **Frontend**: Easily deployable on Vercel by importing the `frontend` folder.
-- **Backend**: Deployable on Render. Ensure to set up the appropriate environment variables (`GEMINI_API_KEY`) and use PostgreSQL instead of SQLite in production.
+## 🌐 Production Deployment
+- **Frontend**: Successfully deployed on Vercel Edge Network.
+- **Backend**: Successfully deployed on Render. Webhooks and WebSockets configured for `https://` and `wss://` secure protocols.
