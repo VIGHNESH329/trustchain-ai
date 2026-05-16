@@ -92,5 +92,10 @@ def get_agent_logs(id: int, db: Session = Depends(get_db)):
     logs = db.query(models.AgentLog).filter(models.AgentLog.investigation_id == id).order_by(models.AgentLog.created_at.asc()).all()
     return logs
 
+@app.get("/history", response_model=list[schemas.FullInvestigationResponse])
+def get_investigation_history(skip: int = 0, limit: int = 50, db: Session = Depends(get_db)):
+    db_invs = db.query(models.Investigation).order_by(models.Investigation.created_at.desc()).offset(skip).limit(limit).all()
+    return db_invs
+
 if __name__ == "__main__":
     uvicorn.run("main:app", host="0.0.0.0", port=8000, reload=True)
