@@ -12,6 +12,8 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+import { ClerkProvider } from '@clerk/nextjs';
+
 export const metadata: Metadata = {
   title: "Trust Chain AI",
   description: "Autonomous Multi-Agent Cybersecurity Platform",
@@ -23,11 +25,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html
-      lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased dark`}
-    >
-      <body className="min-h-full flex flex-col bg-background text-foreground">{children}</body>
-    </html>
+    <ClerkProvider appearance={{ variables: { colorPrimary: '#3b82f6', colorBackground: '#0a0a0a', colorText: 'white', colorInputBackground: '#111' } }}>
+      <html
+        lang="en"
+        className={`${geistSans.variable} ${geistMono.variable} h-full antialiased dark`}
+      >
+        <body className="min-h-full flex flex-col bg-background text-foreground">{children}</body>
+      </html>
+    </ClerkProvider>
   );
 }

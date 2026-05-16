@@ -9,6 +9,7 @@ import Link from "next/link";
 import { Badge } from "@/components/ui/badge";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Progress } from "@/components/ui/progress";
+import { UserButton } from "@clerk/nextjs";
 
 // WebSocket URL
 const WS_URL = "wss://trustchain-ai-j7rp.onrender.com/ws/dashboard";
@@ -113,6 +114,8 @@ export default function Dashboard() {
             </span>
             {wsStatus}
           </span>
+          <div className="w-px h-4 bg-white/10" />
+          <UserButton afterSignOutUrl="/" />
         </div>
       </header>
 

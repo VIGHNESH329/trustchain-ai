@@ -8,6 +8,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
+import { UserButton } from "@clerk/nextjs";
 
 export default function ThreatHistory() {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -51,6 +52,9 @@ export default function ThreatHistory() {
             <Database className="w-4 h-4 text-indigo-400" />
           </div>
           <span className="font-bold text-lg tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-white to-white/60">Threat Database</span>
+        </div>
+        <div className="ml-auto">
+          <UserButton afterSignOutUrl="/" />
         </div>
       </header>
 
