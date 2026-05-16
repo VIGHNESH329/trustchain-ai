@@ -13,7 +13,8 @@ import { Progress } from "@/components/ui/progress";
 import { UserButton } from "@clerk/nextjs";
 
 // WebSocket URL
-const WS_URL = "wss://trustchain-ai-j7rp.onrender.com/ws/dashboard";
+const API_BASE_URL = 'https://trustchain-ai-backend.onrender.com';
+const WS_URL = `${API_BASE_URL.replace('https', 'wss')}/ws/dashboard`;
 
 export default function Dashboard() {
   const [stats, setStats] = useState({ total_investigations: 0, completed: 0, failed: 0, high_risk: 0 });

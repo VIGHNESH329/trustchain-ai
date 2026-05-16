@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_BASE_URL = 'https://trustchain-ai-j7rp.onrender.com';
+const API_BASE_URL = 'https://trustchain-ai-backend.onrender.com';
 
 export const api = axios.create({
   baseURL: API_BASE_URL,
