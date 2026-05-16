@@ -30,3 +30,8 @@ export const getAgentLogs = async (id: number) => {
   const response = await api.get(`/agent/logs/${id}`);
   return response.data;
 };
+
+export const getHistory = async () => {
+  const response = await api.get('/history');
+  return response.data;
+};

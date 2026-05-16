@@ -101,7 +101,11 @@ export default function Dashboard() {
           </Link>
           <span className="font-bold text-lg tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-white to-white/60">Trust Chain SOC</span>
         </div>
-        <div className="ml-auto flex items-center gap-4 text-sm font-medium text-white/50">
+        <div className="ml-auto flex items-center gap-6 text-sm font-medium text-white/50">
+          <Link href="/threat-history" className="flex items-center gap-2 hover:text-white transition-colors">
+            <History className="w-4 h-4" /> Threat Database
+          </Link>
+          <div className="w-px h-4 bg-white/10" />
           <span className="flex items-center gap-2">
             <span className="relative flex h-2 w-2">
               <span className={`animate-ping absolute inline-flex h-full w-full rounded-full opacity-75 ${wsStatus.includes("Online") ? 'bg-green-400' : 'bg-red-400'}`}></span>
